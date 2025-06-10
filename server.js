@@ -33,6 +33,26 @@ const errorHandler = require('./middleware/errorHandler');
 app.use(cors());
 app.use(express.json());
 
+app.set('trust proxy', 1);
+
+// Sessions
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    secure: false, // set to true only in production/Render with HTTPS
+    sameSite: 'lax'
+  }
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Routes
+const authRoutes = require('./routes/auth');
+app.use('/auth', authRoutes);
+
 // Routes
 app.use('/api/clients', clientRoutes);
 app.use('/api/programs', programRoutes);
