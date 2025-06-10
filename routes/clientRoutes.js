@@ -7,6 +7,11 @@ const {
   updateClient,
   deleteClient
 } = require('../controllers/clientController');
+const isAuth = require('../middleware/isAuth');
+
+router.get('/', isAuth, getClients); // protect GET
+router.post('/', isAuth, validateClient, postClient);
+
 
 // Routes
 router.get('/', getAllClients);
