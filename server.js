@@ -5,34 +5,11 @@ const cors = require('cors');
 const session = require('express-session');
 const passport = require('passport');
 
-const app = express();
+const app = express(); // ✅ must be declared before using app.*
+
 require('./auth/auth');
 
-app.use(session({
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: false,
-}));
-app.use(passport.initialize());
-app.use(passport.session());
-
-
-const authRoutes = require('./routes/auth');
-app.use('/auth', authRoutes);
-
-
-
-
-const clientRoutes = require('./routes/clientRoutes');
-const programRoutes = require('./routes/programRoutes');
-const { swaggerUi, swaggerSpec } = require('./swagger');
-app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-const errorHandler = require('./middleware/errorHandler');
-
-// Parse JSON and handle CORS
-app.use(cors());
-app.use(express.json());
-
+// Trust proxy (useful for Render/Heroku)
 app.set('trust proxy', 1);
 
 // Sessions
@@ -41,7 +18,7 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   cookie: {
-    secure: false, // set to true only in production/Render with HTTPS
+    secure: false, // true only in production with HTTPS
     sameSite: 'lax'
   }
 }));
@@ -49,18 +26,28 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+// Middleware
+app.use(cors());
+app.use(express.json());
+
 // Routes
 const authRoutes = require('./routes/auth');
 app.use('/auth', authRoutes);
 
-// Routes
+const clientRoutes = require('./routes/clientRoutes');
+const programRoutes = require('./routes/programRoutes');
 app.use('/api/clients', clientRoutes);
 app.use('/api/programs', programRoutes);
 
-// Error handling middleware
+// Swagger
+const { swaggerUi, swaggerSpec } = require('./swagger');
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+// Error handler
+const errorHandler = require('./middleware/errorHandler');
 app.use(errorHandler);
 
-// MongoDB Connection
+// Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => {
     console.log('Connected to MongoDB');
