@@ -7,10 +7,14 @@ const {
   updateClient,
   deleteClient
 } = require('../controllers/clientController');
-const isAuth = require('../middleware/isAuth');
 
-router.get('/', isAuth, getClients); // protect GET
-router.post('/', isAuth, validateClient, postClient);
+function isLoggedIn(req, res, next) {
+  if (req.user) return next();
+  res.status(401).json({ message: 'Unauthorized' });
+}
+
+router.get('/', isLoggedIn, getAllClients);         // Protected route 1
+router.post('/', isLoggedIn, createClient);         // Protected route 2
 
 
 // Routes

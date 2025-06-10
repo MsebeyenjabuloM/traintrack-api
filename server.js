@@ -1,9 +1,11 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
-const dotenv = require('dotenv');
 const cors = require('cors');
 const session = require('express-session');
 const passport = require('passport');
+
+const app = express();
 require('./auth/auth');
 
 app.use(session({
@@ -13,11 +15,13 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-const authRoutes = require('./routes/authRoutes');
+
+
+const authRoutes = require('./routes/auth');
 app.use('/auth', authRoutes);
 
 
-const app = express();
+
 
 const clientRoutes = require('./routes/clientRoutes');
 const programRoutes = require('./routes/programRoutes');
@@ -25,9 +29,7 @@ const { swaggerUi, swaggerSpec } = require('./swagger');
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 const errorHandler = require('./middleware/errorHandler');
 
-dotenv.config();
-
-
+// Parse JSON and handle CORS
 app.use(cors());
 app.use(express.json());
 
