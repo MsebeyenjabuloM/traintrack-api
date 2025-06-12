@@ -28,11 +28,23 @@ router.get('/protected', isLoggedIn, (req, res) => {
 
 // 4. Logout
 router.get('/logout', (req, res, next) => {
-  req.logout((err) => {
-    if (err) return next(err);
-    res.redirect('/');
+  req.logout(err => {
+    if (err) {
+      return next(err);
+    }
+
+    // Destroy session 
+    req.session.destroy(err => {
+      if (err) {
+        return next(err);
+      }
+
+      // Send response 
+      res.redirect('/'); 
+    });
   });
 });
+
 
 // 5. Failure
 router.get('/failure', (req, res) => {
