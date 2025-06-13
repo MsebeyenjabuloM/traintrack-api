@@ -5,11 +5,10 @@ const cors = require('cors');
 const session = require('express-session');
 const passport = require('passport');
 
-const app = express(); // ✅ must be declared before using app.*
+const app = express(); 
 
 require('./auth/auth');
 
-// Trust proxy (useful for Render/Heroku)
 app.set('trust proxy', 1);
 
 // Sessions
@@ -18,7 +17,7 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   cookie: {
-    secure: false, // true only in production with HTTPS
+    secure: false, 
     sameSite: 'lax'
   }
 }));
@@ -36,8 +35,12 @@ app.use('/auth', authRoutes);
 
 const clientRoutes = require('./routes/clientRoutes');
 const programRoutes = require('./routes/programRoutes');
+const sessionRoutes = require('./routes/sessionRoutes');
+const trainerRoutes = require('./routes/trainerRoutes');
 app.use('/api/clients', clientRoutes);
 app.use('/api/programs', programRoutes);
+app.use('/api/sessions', sessionRoutes);
+app.use('/api/trainers', trainerRoutes);
 
 // Swagger
 const { swaggerUi, swaggerSpec } = require('./swagger');
