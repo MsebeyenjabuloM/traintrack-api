@@ -72,13 +72,17 @@ router.delete('/:id', controller.deleteSession);
  *             properties:
  *               client:
  *                 type: string
+ *                 example: 665f30f82c450216a94f4b01
  *               trainer:
  *                 type: string
+ *                 example: 665f31b02c450216a94f4b03
  *               date:
  *                 type: string
  *                 format: date-time
+ *                 example: 2025-06-15T10:00:00Z
  *               focus:
  *                 type: string
+ *                 example: Upper body strength
  *     responses:
  *       201:
  *         description: Session created successfully

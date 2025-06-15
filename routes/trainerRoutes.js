@@ -41,10 +41,13 @@ router.delete('/:id', controller.deleteTrainer);
  *             properties:
  *               name:
  *                 type: string
+ *                 example: John Doe
  *               email:
  *                 type: string
+ *                 example: john@example.com
  *               specialty:
  *                 type: string
+ *                 example: Strength Training
  *     responses:
  *       201:
  *         description: Trainer created successfully
@@ -52,7 +55,8 @@ router.delete('/:id', controller.deleteTrainer);
  *         description: Validation error
  */
 
-// router.post('/', createTrainer);
+
+
 
 /**
  * @swagger
@@ -87,7 +91,7 @@ router.delete('/:id', controller.deleteTrainer);
  *         description: Trainer not found
  */
 
-//router.put('/:id', updateTrainer);
+
 
 /**
  * @swagger
@@ -107,6 +111,6 @@ router.delete('/:id', controller.deleteTrainer);
  *         description: Trainer not found
  */
 
-//router.delete('/:id', deleteTrainer);
+
 
 module.exports = router;
