@@ -23,6 +23,32 @@ router.delete('/:id', deleteTrainer);
 /**
  * @swagger
  * /trainers:
+ *   get:
+ *     summary: Get all trainers
+ *     responses:
+ *       200:
+ *         description: A list of trainers
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   _id:
+ *                     type: string
+ *                   name:
+ *                     type: string
+ *                   email:
+ *                     type: string
+ *                   specialty:
+ *                     type: string
+ */
+
+
+/**
+ * @swagger
+ * /trainers:
  *   post:
  *     summary: Create a new trainer
  *     requestBody:
@@ -50,6 +76,38 @@ router.delete('/:id', deleteTrainer);
  *       400:
  *         description: Validation error
  */
+
+/**
+ * @swagger
+ * /trainers/{id}:
+ *   get:
+ *     summary: Get a trainer by ID
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Trainer found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 _id:
+ *                   type: string
+ *                 name:
+ *                   type: string
+ *                 email:
+ *                   type: string
+ *                 specialty:
+ *                   type: string
+ *       404:
+ *         description: Trainer not found
+ */
+
 
 /**
  * @swagger
