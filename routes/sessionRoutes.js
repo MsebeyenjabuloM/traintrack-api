@@ -13,16 +13,12 @@ const {
   updateSessionValidator
 } = require('../validators/sessionValidation');
 
+// Routes
+router.get('/', getAllSessions);
+router.get('/:id', getSessionById);
 router.post('/', createSessionValidator, createSession);
 router.put('/:id', updateSessionValidator, updateSession);
-
-
-router.get('/', controller.getAllSessions);
-router.get('/:id', controller.getSessionById);
-router.post('/', controller.createSession);
-router.put('/:id', controller.updateSession);
-router.delete('/:id', controller.deleteSession);
-
+router.delete('/:id', deleteSession);
 
 /**
  * @swagger
@@ -33,7 +29,6 @@ router.delete('/:id', controller.deleteSession);
  *       200:
  *         description: A list of sessions
  */
-
 
 /**
  * @swagger
@@ -52,7 +47,6 @@ router.delete('/:id', controller.deleteSession);
  *       404:
  *         description: Session not found
  */
-
 
 /**
  * @swagger
@@ -90,7 +84,6 @@ router.delete('/:id', controller.deleteSession);
  *         description: Validation error
  */
 
-
 /**
  * @swagger
  * /sessions/{id}:
@@ -126,7 +119,6 @@ router.delete('/:id', controller.deleteSession);
  *       404:
  *         description: Session not found
  */
-
 
 /**
  * @swagger

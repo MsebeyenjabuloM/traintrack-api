@@ -13,16 +13,12 @@ const {
   updateTrainerValidator
 } = require('../validators/trainerValidation');
 
+// Routes
+router.get('/', getAllTrainers);
+router.get('/:id', getTrainerById);
 router.post('/', createTrainerValidator, createTrainer);
 router.put('/:id', updateTrainerValidator, updateTrainer);
-
-
-router.get('/', controller.getAllTrainers);
-router.get('/:id', controller.getTrainerById);
-router.post('/', controller.createTrainer);
-router.put('/:id', controller.updateTrainer);
-router.delete('/:id', controller.deleteTrainer);
-
+router.delete('/:id', deleteTrainer);
 
 /**
  * @swagger
@@ -54,9 +50,6 @@ router.delete('/:id', controller.deleteTrainer);
  *       400:
  *         description: Validation error
  */
-
-
-
 
 /**
  * @swagger
@@ -91,8 +84,6 @@ router.delete('/:id', controller.deleteTrainer);
  *         description: Trainer not found
  */
 
-
-
 /**
  * @swagger
  * /trainers/{id}:
@@ -110,7 +101,5 @@ router.delete('/:id', controller.deleteTrainer);
  *       404:
  *         description: Trainer not found
  */
-
-
 
 module.exports = router;
