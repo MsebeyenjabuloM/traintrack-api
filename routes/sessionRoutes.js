@@ -70,6 +70,9 @@ router.delete('/:id', deleteSession);
  *               trainer:
  *                 type: string
  *                 example: 665f31b02c450216a94f4b03
+ *               program:
+ *                 type: string
+ *                 example: 684efb83fc0320dfcc6520c2
  *               date:
  *                 type: string
  *                 format: date-time
