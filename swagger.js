@@ -1,6 +1,6 @@
-// swagger.js
 const swaggerJSDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
+const fs = require('fs');
 
 const options = {
   definition: {
@@ -21,13 +21,14 @@ const options = {
 
 const swaggerSpec = swaggerJSDoc(options);
 
+
+
+fs.writeFileSync('./swagger.json', JSON.stringify(swaggerSpec, null, 2));
+console.log('✅ Swagger spec written to swagger.json');
+
+
 module.exports = {
   swaggerUi,
   swaggerSpec,
 };
 
-const fs = require('fs');
-
-
-fs.writeFileSync('./swagger.json', JSON.stringify(swaggerSpec, null, 2));
-console.log('✅ Swagger spec written to swagger.json');
