@@ -31,6 +31,25 @@ router.get('/', getAllPrograms);
 
 /**
  * @swagger
+ * /programs/{id}:
+ *   get:
+ *     summary: Get a program by ID
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Program found
+ *       404:
+ *         description: Program not found
+ */
+
+
+/**
+ * @swagger
  * /programs:
  *   post:
  *     summary: Create a new program

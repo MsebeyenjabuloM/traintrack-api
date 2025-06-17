@@ -37,6 +37,25 @@ router.delete('/:id', deleteClient);
 
 /**
  * @swagger
+ * /clients/{id}:
+ *   get:
+ *     summary: Get a client by ID
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Client found
+ *       404:
+ *         description: Client not found
+ */
+
+
+/**
+ * @swagger
  * /clients:
  *   post:
  *     summary: Add a new client

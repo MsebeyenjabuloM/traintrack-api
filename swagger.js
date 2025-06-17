@@ -25,3 +25,9 @@ module.exports = {
   swaggerUi,
   swaggerSpec,
 };
+
+const fs = require('fs');
+
+
+fs.writeFileSync('./swagger.json', JSON.stringify(swaggerSpec, null, 2));
+console.log('✅ Swagger spec written to swagger.json');
