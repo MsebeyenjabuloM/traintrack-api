@@ -6,9 +6,9 @@ const options = {
   definition: {
     openapi: '3.0.0',
     info: {
-      title: 'Personal Training API',
+      title: 'TrainTrack API',
       version: '1.0.0',
-      description: 'API for managing clients and workout programs',
+      description: 'API for managing clients, programs, sessions, and trainers',
     },
     servers: [
       {
@@ -22,10 +22,12 @@ const options = {
 const swaggerSpec = swaggerJSDoc(options);
 
 
-
-fs.writeFileSync('./swagger.json', JSON.stringify(swaggerSpec, null, 2));
-console.log('✅ Swagger spec written to swagger.json');
-
+try {
+  fs.writeFileSync('./swagger.json', JSON.stringify(swaggerSpec, null, 2));
+  console.log('✅ Swagger spec written to swagger.json');
+} catch (err) {
+  console.error('❌ Failed to write Swagger spec:', err);
+}
 
 module.exports = {
   swaggerUi,
